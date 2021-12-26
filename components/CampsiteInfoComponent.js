@@ -10,7 +10,7 @@ const mapStateToProps = state => {
         campsites: state.campsites,
         comments: state.comments
     };
-};
+}; 
 
 
 function RenderCampsite(props) {
