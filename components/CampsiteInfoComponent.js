@@ -3,6 +3,7 @@ import { Text, View, ScrollView, FlatList, Modal, Button, StyleSheet } from 'rea
 import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import { postComment } from '../redux/ActionCreators';
 
 
 const mapStateToProps = state => {
@@ -11,6 +12,10 @@ const mapStateToProps = state => {
         comments: state.comments
     };
 }; 
+
+const mapDispatchToProps = {
+    postComment: (campsiteId, rating, author, text) => postComment(campsiteId, rating, author, text),
+};
 
 
 function RenderCampsite(props) {
@@ -104,7 +109,8 @@ class CampsiteInfo extends Component {
     }
 
     handleComment(campsiteId){
-        console.log(JSON.stringify(this.state));
+        //console.log(JSON.stringify(this.state));
+        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text);
         this.toggleModal();
     }
 
@@ -155,15 +161,15 @@ class CampsiteInfo extends Component {
                             placeholder='Author'
                             leftIcon={{type:'font-awesome', name:'user-o'}}
                             leftIconContainerStyle={{paddingRight: 10}}
-                            onChangeText={value => this.setState({author: value})}
-                            //value
+                            onChangeText={text => this.setState({author: text})}
+                            value={this.state.author}
                         />
                         <Input
                             placeholder='Comment'
                             leftIcon={{type:'font-awesome', name:'comment-o'}}
                             leftIconContainerStyle={{paddingRight: 10}}
-                            onChangeText={value => this.setState({text: value})}
-                            //value
+                            onChangeText={text => this.setState({text: text})}
+                            value={this.state.text}
                         />
                         <View style={{margin: 10}}>
                             <Button
@@ -205,4 +211,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps)(CampsiteInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(CampsiteInfo);
