@@ -174,3 +174,7 @@ export const addPartners = partners => ({
     payload: partners
 });
 
+export const deleteFavorite = campsiteId => ({
+    type: ActionTypes.DELETE_FAVORITE,
+    payload: campsiteId
+}); 
