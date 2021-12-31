@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Text, View, ScrollView, StyleSheet,
-    Picker, Switch, Button, Modal } from 'react-native';
+    Picker, Switch, Button, Alert } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Animatable from 'react-native-animatable';
 
 class Reservation extends Component {
+
+    
 
     constructor(props) {
         super(props);
@@ -14,7 +16,7 @@ class Reservation extends Component {
             hikeIn: false,
             date: new Date(),
             showCalendar: false,
-            showModal: false
+            // showModal: false
         };
     }
 
@@ -22,13 +24,35 @@ class Reservation extends Component {
         title: 'Reserve Campsite'
     }
 
-    toggleModal() {
-        this.setState({showModal: !this.state.showModal});
+    // toggleModal() {
+    //     this.setState({showModal: !this.state.showModal});
+    // }
+    createAlert() {
+        Alert.alert(
+            'Begin Search?',
+            'Number of Campers: ' + this.state.campers + '\n\nHike-In? ' + this.state.hikeIn + '\n\nDate: ' + this.state.date.toLocaleDateString('en-US'),
+          
+            //'Hike-In? ' + this.state.hikeIn,
+            // 'Date:' + this.state.date,
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel',
+                    onPress: () => console.log('Cancel Pressed')
+                },
+                {
+                    text: 'OK',
+                    onPress: () => console.log('OK Pressed')
+                }
+            ]
+        );
     }
 
     handleReservation() {
         console.log(JSON.stringify(this.state));
-        this.toggleModal();
+        // this.toggleModal();
+        this.createAlert();
+        this.resetForm();
     }
 
     resetForm() {
@@ -37,7 +61,7 @@ class Reservation extends Component {
             hikeIn: false,
             date: new Date(),
             showCalendar: false,
-            showModal: false
+            // showModal: false
         });
     }
 
@@ -101,10 +125,11 @@ class Reservation extends Component {
                             title='Search'
                             color='#5637DD'
                             accessibilityLabel='Tap me to search for available campsites to reserve'
+                            
                         />
                     </View>
                 </Animatable.View>
-                <Modal
+                {/* <Modal
                     animationType={'slide'}
                     transparent={false}
                     visible={this.state.showModal}
@@ -130,7 +155,10 @@ class Reservation extends Component {
                             title='Close'
                         />
                     </View>
-                </Modal>
+                </Modal> */}
+                <View>
+                    
+                </View>
             </ScrollView>
         );
     }
@@ -151,22 +179,22 @@ const styles = StyleSheet.create({
     formItem: {
         flex: 1
     },
-    modal: { 
-        justifyContent: 'center',
-        margin: 20
-    },
-    modalTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        backgroundColor: '#5637DD',
-        textAlign: 'center',
-        color: '#fff',
-        marginBottom: 20
-    },
-    modalText: {
-        fontSize: 18,
-        margin: 10
-    }
+    // modal: { 
+    //     justifyContent: 'center',
+    //     margin: 20
+    // },
+    // modalTitle: {
+    //     fontSize: 24,
+    //     fontWeight: 'bold',
+    //     backgroundColor: '#5637DD',
+    //     textAlign: 'center',
+    //     color: '#fff',
+    //     marginBottom: 20
+    // },
+    // modalText: {
+    //     fontSize: 18,
+    //     margin: 10
+    // }
 });
 
 export default Reservation;
