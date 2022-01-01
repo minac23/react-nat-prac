@@ -145,16 +145,11 @@ class CampsiteInfo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            favorite: false,
             showModal: false,
             rating: 5,
             author: '',
             text:''
         };
-    }
-
-    markFavorite(campsiteId) {
-        this.props.postFavorite(campsiteId);
     }
 
     toggleModal() {
@@ -169,12 +164,16 @@ class CampsiteInfo extends Component {
 
     resetForm() {
         this.setState({
-            favorite: false,
+            //favorite: false,
             showModal: false,
             rating: 5,
             author: '',
             text:''
         });
+    }
+
+    markFavorite(campsiteId) {
+        this.props.postFavorite(campsiteId);
     }
 
     static navigationOptions = {
