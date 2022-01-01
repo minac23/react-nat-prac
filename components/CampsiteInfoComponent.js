@@ -97,7 +97,9 @@ function RenderCampsite(props) {
                             color='#5637DD'
                             raised
                             reverse
-                            onPress={() => props.onShowModal()}
+                            onPress={() => 
+                                props.onShowModal()
+                            }
                         />
                     </View>  
                 </Card>
@@ -190,6 +192,7 @@ class CampsiteInfo extends Component {
                 <RenderCampsite campsite={campsite}
                     favorite={this.props.favorites.includes(campsiteId)}
                     markFavorite={() => this.markFavorite(campsiteId)}
+                    onShowModal={() => this.toggleModal()}
                 />
                 <RenderComments comments={comments} />
                 <Modal
