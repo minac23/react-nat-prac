@@ -338,22 +338,23 @@ class Main extends Component {
         //         : ToastAndroid.show('Initial Network Connectivity Type: ' +
         //             connectionInfo.type, ToastAndroid.LONG);
         // });
-        showNetInfo();
-
+        this.showNetInfo();
 
         this.unsubscribeNetInfo = NetInfo.addEventListener(connectionInfo => {
             this.handleConnectivityChange(connectionInfo);
         });
 
-        async function showNetInfo() {
-            let connectionInfo = await NetInfo.fetch();
-            (Platform.OS === 'ios')
-                ? Alert.alert('Initial Network Connectivity Type:', connectionInfo.type)
-                : ToastAndroid.show('Initial Network Connectivity Type: ' +
-                    connectionInfo.type, ToastAndroid.LONG);
-        };       
+           
     }
 
+    async showNetInfo() {
+        let connectionInfo = await NetInfo.fetch();
+        (Platform.OS === 'ios')
+            ? Alert.alert('Initial Network Connectivity Type:', connectionInfo.type)
+            : ToastAndroid.show('Initial Network Connectivity Type: ' +
+                connectionInfo.type, ToastAndroid.LONG);
+    }; 
+    
     componentWillUnmount() {
         this.unsubscribeNetInfo();
     }
